@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>葫芦娃视频直播 Demo</title>
+</head>
+<body>
+  <h1>葫芦娃视频直播 SDK Demo</h1>
+
+  <div>
+    <input id="room" placeholder="Room ID">
+    <input id="user" placeholder="Username">
+    <button onclick="join()">Join</button>
+    <button onclick="leave()">Leave</button>
+  </div>
+
+  <br>
+
+  <div>
+    <input id="msg" placeholder="Message">
+    <button onclick="send()">Send</button>
+  </div>
+
+  <script src="../sdk/huluwa-live-sdk.js"></script>
+  <script>
+    const sdk = new HuluwaLiveSDK({
+      serverUrl: "ws://localhost:9500"
+    });
+
+    sdk.connect();
+
+    function join() {
+      sdk.joinRoom(
+        document.getElementById("room").value,
+        document.getElementById("user").value
+      );
+    }
+
+    function send() {
+      sdk.sendMessage(
+        document.getElementById("msg").value
+      );
+    }
+
+    function leave() {
+      sdk.leaveRoom();
+    }
+  </script>
+</body>
+</html>
